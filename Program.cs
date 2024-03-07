@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Movie4Free.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<Movie4FreeContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Movie4FreeContext") ?? throw new InvalidOperationException("Connection string 'Movie4FreeContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
