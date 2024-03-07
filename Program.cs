@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Movie4Free.Data;
+using Movie4Free.Models;
+
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Movie4FreeContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Movie4FreeContext") ?? throw new InvalidOperationException("Connection string 'Movie4FreeContext' not found.")));
@@ -9,6 +12,13 @@ builder.Services.AddDbContext<Movie4FreeContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

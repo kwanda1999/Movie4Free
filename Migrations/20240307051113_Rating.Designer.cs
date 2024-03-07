@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Movie4Free.Data;
 
@@ -11,9 +12,11 @@ using Movie4Free.Data;
 namespace Movie4Free.Migrations
 {
     [DbContext(typeof(Movie4FreeContext))]
-    partial class Movie4FreeContextModelSnapshot : ModelSnapshot
+    [Migration("20240307051113_Rating")]
+    partial class Rating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
